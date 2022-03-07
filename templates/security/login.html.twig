@@ -1,0 +1,55 @@
+{% block stylesheets %}
+	<link rel="stylesheet" type="text/css" href="{{ asset('frontOffice/css/plugins.min.css') }}">
+	<link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/dashboard/1-4-7/vendor/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="{{ asset('frontOffice/plugins/themify/themify-icons.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('frontOffice/css/style.min.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('frontOffice/css/templete.min.css') }}">
+	<link class="skin" rel="stylesheet" type="text/css" href="{{ asset('frontOffice/css/skin/skin-1.min.css') }}">
+	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&amp;family=Montserrat:wght@100;200;300;400;500;600;700;800;900&amp;family=Open+Sans:wght@300;400;600;700;800&amp;family=Roboto:wght@100&amp;family=Rubik:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet">
+{% endblock %}
+{% block content %}
+	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+	<section class="vh-100 bg-image" style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
+		<div class="mask d-flex align-items-center h-100 gradient-custom-3">
+			<div class="container h-100">
+				<div class="row d-flex justify-content-center align-items-center h-100">
+					<div class="col-12 col-md-9 col-lg-7 col-xl-6">
+						<div class="card" style="border-radius: 15px;">
+							<div class="card-body p-5">
+								<h2 class="text-uppercase text-center mb-5">Create an account</h2>
+
+								{% if error %}
+									<div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+								{% endif %}
+								<form action="{{ path('security_login') }}" method="post">
+
+									<div class="form-outline mb-4">
+										<input type="email" placeholder="Adress mail" required name="_username" id="form3Example3cg" class="form-control form-control-lg"/>
+									</div>
+
+									<div class="form-outline mb-4">
+										<input type="password" placeholder="Password" required name="_password" id="form3Example4cg" class="form-control form-control-lg"/>
+									</div>
+
+									<div class="d-flex justify-content-center">
+                    <input type="hidden" name="_target_path" value="{{ path('back_end') }}" />
+										<button type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Login</button>
+										<!--<button class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" > <a href="{{ path('back_end') }}" class="fw-bold text-body"> Login</a></button>-->
+									</div>
+								</form>
+								<p class="text-center text-muted mt-5 mb-0">Don't have an account?
+									<a href="{{ path('security_registration') }}" class="fw-bold text-body">
+										<u>Signin here</u>
+									</a>
+								</p>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5WEs73ZKe8-8YdYVDH8qAhIE38O_njO4&sensor=false&amp;libraries=places" type="text/javascript"></script>
+	<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
+</script>{% endblock %}

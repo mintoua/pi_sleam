@@ -1,0 +1,99 @@
+{% extends 'baseback.html.twig' %}
+{% block SS %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/helpers.esm.min.js" integrity="sha512-urWBnIv+F027G24xDNigjxvIuwnWlWy94W2yx77VkISKLzKSohOKOubMDhtEF6LZcEH7gctmNSpxDqIW/zMmUg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{% endblock %}
+{% block content %}
+<section class="dashboard-counts section-padding" >
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Count item widget-->
+      <div class="col-xl-2 col-md-4 col-6">
+        <div class="wrapper count-title d-flex">
+          <div class="icon"></div>
+          <div class="name"><strong class="text-uppercase">Alerts Redzone</strong><span>Last days</span>
+            <div class="count-number">{{nbAlertRedZone}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-2 col-md-4 col-6">
+        <div class="wrapper count-title d-flex">
+          <div class="icon"><i class="icon-alert"></i></div>
+          <div class="name"><strong class="text-uppercase">Alerts Gaz</strong><span>Last days</span>
+            <div class="count-number">{{nbAlertGaz}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+  <section class="statistics">
+    <div class="container-fluid">
+      <div class="row d-flex">
+        <div class="col-lg-4">
+          <!-- Income-->
+          <canvas id="alerts" width="400" height="400"></canvas>
+        </div>
+        <div class="col-lg-4">
+          <!-- User Actibity-->
+          <div class="card user-activity">
+            <canvas id="alertsUsers" width="400" height="400"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+{% block JS%}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+const alerts = document.getElementById('alerts').getContext('2d');
+const myChart = new Chart(alerts, {
+    type: 'pie',
+    data: {
+        labels: ['RedZoneAlert', 'GazAlert'],
+        datasets: [{
+            label: 'Repartition des alerts',
+            data: [{{nbAlertRedZone}}, {{nbAlertGaz}}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)'
+            ],
+            borderWidth: 1
+        }]
+    }
+});
+const ctx = document.getElementById('alertsUsers').getContext('2d');
+const myChart2 = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['RedZoneAlert', 'GazAlert'],
+        datasets: [{
+            label: 'Rep Alerts',
+            data: [{{nbAlertRedZone}}, {{nbAlertGaz}}],
+            backgroundColor: [
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)'
+
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
+
+{% endblock%}

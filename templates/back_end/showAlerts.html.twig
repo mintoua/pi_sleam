@@ -1,0 +1,47 @@
+{% extends 'baseback.html.twig' %}
+
+{% block contentHeader %}
+           <div class="breadcrumb-holder">
+        <div class="container-fluid">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('back_end') }}">Home</a></li>
+            <li class="breadcrumb-item active"><a href="{{ path('backend_show_alerts') }}">Alerts</a></li>
+          </ul>
+        </div>
+      </div>
+{% endblock %}
+{% block content %}
+
+    {% if alerts %}
+        <table id="alert" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Date/Time</th>
+                    <th>Longitude</th>
+                    <th>Latitude </th>
+                    <th>Type </th>
+                    <th>Id_User </th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for alert in alerts %}
+                <tr>
+                    <td> {{ alert.date }}</td>
+                    <td> {{ alert.longitude  }}</td>
+                    <td> {{ alert.latitude }}</td>
+                    <td> {{ alert.type }}</td>
+                    <td> {{ alert.id_user }}</td>
+                    <td>
+                        <a href="" class="btn btn-danger btn-sm" > Delete </a>
+                    </td>
+
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    {% else %}
+        <p>Empty</p>
+    {% endif %}
+{% endblock %}

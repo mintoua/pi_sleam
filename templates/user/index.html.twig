@@ -1,0 +1,43 @@
+{% extends 'baseback.html.twig' %}
+
+{% block contentHeader %}
+           <div class="breadcrumb-holder">
+        <div class="container-fluid">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('back_end') }}">Home</a></li>
+            <li class="breadcrumb-item active"><a href="{{ path('user_list') }}">Users</a></li>
+          </ul>
+        </div>
+      </div>
+{% endblock %}
+{% block content %}
+
+    {% if users %}
+        <table id="alert" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Role</th>
+                    <th>Email</th>
+                    <th>Username </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td> {{ user.id }}</td>
+                    <td> {{ user.email  }}</td>
+                    <td> {{ user.username }}</td>
+                    <td>
+                        <a href="" class="btn btn-danger btn-sm" > Delete </a>
+                    </td>
+
+
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    {% else %}
+        <p>Empty</p>
+    {% endif %}
+{% endblock %}

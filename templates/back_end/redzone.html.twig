@@ -1,0 +1,89 @@
+{% extends 'baseback.html.twig' %}
+
+{% block content %}
+
+	<div class="card-header d-flex align-items-center">
+		<h4>Fill the form to add zone</h4>
+	</div>
+	<div class="card-body">
+		{{ form_start(form) }}
+		<p>{{ form_errors(form) }}</p>
+		<form class="form-horizontal">
+			<div class="form-group row">
+				<div class="col-sm-2">
+					{{ form_label(form.Long1) }}
+				</div>
+				<div class="col-sm-10">
+					{{ form_widget(form.Long1) }}<small class="form-text">Example: 12.1234567
+					</small>
+				</div>
+
+			</div>
+			<div class="form-group row">
+				<div class="col-sm-2">
+					{{ form_label(form.Long2) }}
+				</div>
+				<div class="col-sm-10">
+					{{ form_widget(form.Long2) }}<small class="form-text">Example: 12.1234567
+					</small>
+				</div>
+			</div>
+			<div class="form-group row">
+				<div class="col-sm-2">
+					{{ form_label(form.Lat1) }}
+				</div>
+				<div class="col-sm-10">
+					{{ form_widget(form.Lat1) }}<small class="form-text">Example: 12.1234567
+					</small>
+				</div>
+			</div>
+			<div class="form-group row">
+				<div class="col-sm-2">
+					{{ form_label(form.Lat2) }}
+				</div>
+				<div class="col-sm-10">
+					{{ form_widget(form.Lat2) }}<small class="form-text">Example: 12.1234567
+					</small>
+
+				</div>
+			</div>
+			<div class="form-group row">
+				<div class="col-sm-2">
+					<button type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Configure</button>
+				</div>
+
+			</div>
+
+			{{ form_end(form) }}
+		</form>
+	</div>
+    <div id="map" class="card-body">
+		<!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+		<script
+		  src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap&v=weekly"
+		  async
+		></script>
+	</div>
+
+
+
+{% endblock %}
+{% block JS%}
+<script>
+	function initMap() {
+		const myLatLng = { lat: -25.363, lng: 131.044 };
+		const map = new google.maps.Map(document.getElementById("map"), {
+		  zoom: 4,
+		  center: myLatLng,
+		});
+	  
+		new google.maps.Marker({
+		  position: myLatLng,
+		  map,
+		  title: "Hello World!",
+		});
+	  }
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+<script src="BackEnd/js/custom.js"></script>
+{% endblock%}
